@@ -26,10 +26,10 @@ endif
 
 bench: bench.c pre_req
 	${CC} ${CFLAGS} bench.c --static --std=c99  -lm -o bench
-	(${CGEIST} -I../ -I$(CLANG_INCLUDE) bench.c -S >bench.scf 2>error_cgeist_scf.log && printf "\tCGEIST success! (SCF)\n") || printf "\tCGEIST failed! (SCF)\n"
+	(${CGEIST} -I../ -I$(CLANG_INCLUDE) bench.c -S >bench.mlir 2>error_cgeist.log && printf "\tCGEIST success! (SCF)\n") >> ../results.log || printf "\tCGEIST failed! (SCF)\n" >> ../results.log
 
 clean:
-	rm -f bench bench.scf *.log
+	rm -f bench bench.scf *.log ../results.log
 
 .phony : clean all
 
